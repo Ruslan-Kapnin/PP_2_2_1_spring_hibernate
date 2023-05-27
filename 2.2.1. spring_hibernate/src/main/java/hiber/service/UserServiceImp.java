@@ -27,7 +27,7 @@ public class UserServiceImp implements UserService {
    @Override
    @Transactional
    public User getUserByCar(int series, String model) {
-      String HQL = "from User u left outer join fetch u.car where u.car.series=:series and u.car.model=:model";
+      String HQL = "from User u where u.car.series=:series and u.car.model=:model";
       return sessionFactory.getCurrentSession().createQuery(HQL, User.class).setParameter("series", series).setParameter("model", model).uniqueResult();
    }
 
