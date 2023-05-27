@@ -21,7 +21,8 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   @OneToOne(mappedBy = "user")
+   @OneToOne
+   @JoinColumn(name = "car_id", referencedColumnName = "id")
    @Cascade(org.hibernate.annotations.CascadeType.ALL)
    private Car car;
 
@@ -79,5 +80,16 @@ public class User {
 
    public void setCar(Car car) {
       this.car = car;
+   }
+
+   @Override
+   public String toString() {
+      return "User{" +
+              "id=" + id +
+              ", firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              ", email='" + email + '\'' +
+              ", car=" + car +
+              '}';
    }
 }

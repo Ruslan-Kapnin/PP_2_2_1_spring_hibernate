@@ -6,19 +6,20 @@ import java.io.Serializable;
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String model;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int series;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "car")
     private User user;
     public Car() {}
-    public Car(String model) {
+    public Car(String model, int series) {
         this.model = model;
+        this.series = series;
     }
 
     public String getModel() {
@@ -43,6 +44,14 @@ public class Car implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
